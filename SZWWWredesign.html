@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Słowo Życia | Wspólnota katolicka</title>
+<meta name="description" content="Spotykamy się co tydzień na modlitwie, lekturze Pisma Świętego i zwyczajnej rozmowie przy stole. Możesz przyjść sam, bez zapisów.">
+<meta property="og:title" content="Słowo Życia | Wspólnota katolicka">
+<meta property="og:description" content="Modlitwa, Pismo Święte i rozmowa przy stole. Przyjdź w czwartek, bez zapisów.">
+<meta property="og:type" content="website">
+<!-- TODO: dodaj og:image (1200x630) oraz favicon -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   TOKENY
+   Jeden akcent na całą stronę: --brick (ceglany, zachowany z oryginału).
+   --honey to wyłącznie kolor podkreślenia i osi czasu, nigdy przycisku.
+   Promienie: powierzchnie 18px, elementy klikalne 999px. Bez wyjątków.
+   ============================================================ */
+:root{
+  --paper:#fdfbf8; --soft:#f1ece3; --ink:#23201c; --muted:#6a6259;
+  --brick:#862c18; --brick-ink:#fdfbf8; --honey:#d1922b;
+  --line:#e5ded3; --deep:#2a211c; --deep-ink:#f6f0e6;
+  --r-surface:18px; --max:1160px;
+  color-scheme:light dark;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --paper:#191511; --soft:#221d18; --ink:#f3ede4; --muted:#a79d90;
+    --brick:#e08a6e; --brick-ink:#1d1410; --honey:#e0b25e;
+    --line:#332c24; --deep:#221d18; --deep-ink:#f3ede4;
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"DM Sans",system-ui,sans-serif;font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+img{max-width:100%;display:block}
+:focus-visible{outline:2px solid var(--brick);outline-offset:3px;border-radius:4px}
+.wrap{width:min(100% - 40px,var(--max));margin-inline:auto}
+.skip{position:absolute;left:-9999px}
+.skip:focus{left:16px;top:16px;z-index:50;background:var(--paper);padding:10px 16px;border-radius:999px;border:1px solid var(--line)}
+
+h1,h2,h3{margin:0;font-family:"Newsreader",Georgia,serif;font-weight:400;line-height:1.12;letter-spacing:-.015em}
+h1{font-size:clamp(40px,5.4vw,68px);line-height:1.16;padding-bottom:2px}
+h2{font-size:clamp(31px,3.8vw,46px)}
+h3{font-size:clamp(20px,2vw,24px);letter-spacing:-.005em}
+p{margin:0 0 18px;max-width:62ch}
+h1+p,h2+p,h3+p{margin-top:20px}
+h3+p{margin-top:8px}
+.lead{font-size:clamp(18px,1.5vw,20px);color:var(--muted)}
+.mark{text-decoration:underline;text-decoration-color:var(--honey);text-decoration-thickness:.11em;text-underline-offset:.17em;text-decoration-skip-ink:auto}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brick);margin:0 0 18px}
+
+section{padding:clamp(64px,9vw,110px) 0}
+.soft{background:var(--soft)}
+
+/* nawigacja: jedna linia na desktopie, wysokość 68px */
+.topbar{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav{height:68px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{display:flex;align-items:center;gap:11px;text-decoration:none;font-weight:700;letter-spacing:-.01em}
+.brand img{height:32px;width:auto}
+.navlinks{display:flex;gap:26px;font-size:15px}
+.navlinks a{text-decoration:none;color:var(--muted);transition:color .2s}
+.navlinks a:hover{color:var(--ink)}
+.menu{display:none}
+.menu summary{list-style:none;cursor:pointer;padding:9px 16px;border:1px solid var(--line);border-radius:999px;font-size:14px;font-weight:500}
+.menu summary::-webkit-details-marker{display:none}
+.menu[open] .menu-panel{display:grid}
+.menu-panel{display:none;position:absolute;top:68px;left:0;width:100%;background:var(--paper);border-bottom:1px solid var(--line);padding:8px 20px 20px;gap:2px}
+.menu-panel a{text-decoration:none;padding:11px 0;border-bottom:1px solid var(--line)}
+.menu-panel a:last-child{border:0}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;min-height:52px;padding:0 26px;border-radius:999px;text-decoration:none;font-weight:700;font-size:15px;transition:transform .15s,background .2s}
+.btn:active{transform:translateY(1px)}
+.btn-primary{background:var(--brick);color:var(--brick-ink)}
+.btn-primary:hover{background:color-mix(in srgb,var(--brick) 86%,var(--ink))}
+.btn-ghost{border:1px solid var(--line);color:var(--ink)}
+.btn-ghost:hover{border-color:var(--brick);color:var(--brick)}
+.btn-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+
+/* HERO: podział asymetryczny, bez ciemnego przykrycia zdjęcia */
+.hero{padding:clamp(48px,7vw,88px) 0 clamp(56px,7vw,84px)}
+.hero-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:clamp(32px,5vw,64px);align-items:center}
+.hero-photo{border-radius:var(--r-surface);overflow:hidden;background:var(--soft);aspect-ratio:4/5}
+.hero-photo img{width:100%;height:100%;object-fit:cover}
+.hero p.lead{max-width:46ch}
+
+/* pasek praktyczny: jeden rząd, cienkie linie, bez kart */
+.facts{border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.facts-row{display:flex;flex-wrap:wrap;gap:10px 48px;padding:22px 0;align-items:baseline}
+.facts-row div{display:flex;gap:10px;align-items:baseline;font-size:16px}
+.facts-row b{font-family:"Newsreader",serif;font-weight:500;font-size:19px}
+.facts-row span{color:var(--muted)}
+
+/* O NAS: tekst + zdjęcie, cytat pod spodem na pełnej szerokości */
+.about{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(32px,5vw,60px);align-items:start}
+.about{align-items:start}
+.about-photo{border-radius:var(--r-surface);overflow:hidden;aspect-ratio:4/5;background:var(--soft);position:sticky;top:100px}
+.about-photo img{width:100%;height:100%;object-fit:cover}
+.pullquote{margin:clamp(34px,4vw,52px) 0 0;font-family:"Newsreader",serif;font-weight:300;font-size:clamp(23px,2.6vw,32px);line-height:1.32;max-width:26ch}
+.pullquote span{display:block;border-left:2px solid var(--honey);padding-left:26px}
+.quote-src{margin-top:18px;padding-left:28px;font-size:14px;color:var(--muted);font-family:"DM Sans",sans-serif}
+
+/* PRZEBIEG SPOTKANIA: oś czasu, nie trzy równe karty */
+.timeline{margin-top:8px;position:relative;padding-left:0}
+.step{display:grid;grid-template-columns:96px 1fr;gap:clamp(20px,3vw,44px);padding:30px 0;border-top:1px solid var(--line)}
+.step:first-child{border-top:0}
+.step-time{font-family:"Newsreader",serif;font-size:22px;color:var(--brick);position:relative;padding-top:2px}
+.step p{margin:8px 0 0;color:var(--muted);max-width:56ch}
+
+/* MOMENT SŁOWA: pełna szerokość, typografia jest treścią */
+.verse{text-align:center;padding-block:clamp(72px,10vw,128px)}
+.verse blockquote{margin:0 auto;max-width:17ch;font-family:"Newsreader",serif;font-weight:300;font-size:clamp(32px,6vw,68px);line-height:1.15}
+.verse cite{display:block;margin-top:26px;font-style:normal;font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+
+/* ALPHA: ciepła ciemna płyta, trzy konkretne liczby */
+.alpha{background:var(--deep);color:var(--deep-ink);border-radius:26px;padding:clamp(36px,5vw,70px)}
+.alpha-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:clamp(30px,4vw,56px);align-items:center}
+.alpha h2{color:var(--deep-ink)}
+.alpha p{color:color-mix(in srgb,var(--deep-ink) 76%,transparent)}
+.alpha .eyebrow{color:var(--honey)}
+.alpha .btn-primary{background:var(--honey);color:#2a211c}
+.alpha .btn-primary:hover{background:color-mix(in srgb,var(--honey) 88%,#fff)}
+.alpha-facts{display:grid;gap:14px}
+.fact{display:flex;align-items:baseline;gap:16px;padding-bottom:14px;border-bottom:1px solid color-mix(in srgb,var(--deep-ink) 16%,transparent)}
+.fact:last-child{border:0;padding-bottom:0}
+.fact b{font-family:"Newsreader",serif;font-weight:400;font-size:38px;color:var(--honey);min-width:78px;line-height:1}
+.fact span{font-size:15px;color:color-mix(in srgb,var(--deep-ink) 72%,transparent)}
+
+/* ŻYCIE WSPÓLNOTY: bento 1 duży + 2 mniejsze, dokładnie 3 kafle na 3 treści */
+.bento{display:grid;grid-template-columns:1.4fr 1fr;grid-template-rows:repeat(2,minmax(0,232px));gap:16px}
+.tile{border-radius:var(--r-surface);overflow:hidden;position:relative;min-height:0;background:var(--soft);border:1px solid var(--line)}
+.tile:first-child{grid-row:span 2}
+.tile img{width:100%;height:100%;object-fit:cover}
+.tile-embed{display:grid;place-items:center;text-align:center;padding:26px;color:var(--muted);font-size:14px}
+
+/* ZAPROSZENIE */
+.invite{text-align:center}
+.invite h2{max-width:16ch;margin-inline:auto;font-size:clamp(34px,5vw,58px)}
+.invite p{margin:22px auto 0;max-width:52ch;color:var(--muted)}
+.invite .btn-row{justify-content:center}
+.contact{margin-top:36px;font-size:15px;color:var(--muted)}
+.contact a{color:var(--brick);text-underline-offset:3px}
+
+footer{padding:52px 0 64px;border-top:1px solid var(--line)}
+.foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:28px;align-items:end}
+.foot p{font-size:14px;color:var(--muted);max-width:44ch;margin:16px 0 0}
+.foot nav{display:flex;gap:22px;font-size:14px}
+.foot nav a{text-decoration:none;color:var(--muted)}
+
+/* RUCH: tylko wejście sekcji, wyłącznie transform i opacity, zero JS */
+@media (prefers-reduced-motion:no-preference){
+  @supports (animation-timeline:view()){
+    .reveal{animation:rise linear both;animation-timeline:view();animation-range:entry 0% entry 70%}
+  }
+}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@media print{.reveal{opacity:1!important;transform:none!important;animation:none!important}}
+
+@media(max-width:900px){
+  .about-photo{position:static}
+  .hero-grid,.about,.alpha-grid{grid-template-columns:1fr}
+  .hero-photo{aspect-ratio:4/3}
+  .about{align-items:start}
+.about-photo{aspect-ratio:4/3}
+  .bento{grid-template-columns:1fr;grid-template-rows:none}
+  .tile:first-child{grid-row:auto;aspect-ratio:4/3}
+  .tile{min-height:220px}
+  .navlinks{display:none}
+  .menu{display:block}
+  .step{grid-template-columns:1fr;gap:4px}
+  .pullquote{max-width:none}
+}
+@media(max-width:520px){
+  .wrap{width:min(100% - 28px,var(--max))}
+  .facts-row{gap:12px 26px}
+  .btn{width:100%}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#tresc">Przejdź do treści</a>
+
+<header class="topbar">
+  <div class="wrap nav">
+    <a class="brand" href="#tresc"><img src="logo_SZ.png" alt="Słowo Życia"><span>Słowo Życia</span></a>
+    <nav class="navlinks">
+      <a href="#o-nas">O nas</a>
+      <a href="#spotkania">Spotkania</a>
+      <a href="#alpha">Alpha</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+    <details class="menu">
+      <summary>Menu</summary>
+      <div class="menu-panel">
+        <a href="#o-nas">O nas</a>
+        <a href="#spotkania">Spotkania</a>
+        <a href="#alpha">Alpha</a>
+        <a href="#kontakt">Kontakt</a>
+      </div>
+    </details>
+  </div>
+</header>
+
+<main id="tresc">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">Wspólnota katolicka</p>
+        <h1>Czytamy Słowo.<br>Zostajemy na <span class="mark">rozmowę</span>.</h1>
+        <p class="lead">Spotykamy się w czwartki: modlitwa, fragment Pisma i zwyczajna rozmowa przy stole. Możesz przyjść sam.</p>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="#spotkania">Przyjdź w czwartek</a>
+          <a class="btn btn-ghost" href="#o-nas">Poznaj nas</a>
+        </div>
+      </div>
+      <div class="hero-photo">
+        <!-- zdjęcie z obecnej strony, teraz bez ciemnego przyciemnienia -->
+        <img src="przy_stole.png" alt="Członkowie wspólnoty przy wspólnym stole" width="900" height="1125">
+      </div>
+    </div>
+  </section>
+
+  <!-- PASEK PRAKTYCZNY: uzupełnij prawdziwymi danymi -->
+  <div class="facts">
+    <div class="wrap facts-row">
+      <div><b>Czwartki, 19:00</b></div>
+      <div><b>Salka przy parafii</b><span>ul. Przykładowa 1</span></div>
+      <div><b>Bez zapisów</b><span>wejście wolne, także jednorazowo</span></div>
+    </div>
+  </div>
+
+  <!-- O NAS -->
+  <section id="o-nas" class="reveal">
+    <div class="wrap">
+      <div class="about">
+        <div>
+          <h2>Razem łatwiej słuchać Boga</h2>
+          <p class="lead">Jest nas kilkanaście osób: studenci, małżeństwa, single, ludzie po czterdziestce. Część jest tu od lat, część przyszła miesiąc temu.</p>
+          <p>Nie trzeba mieć wiedzy teologicznej ani gotowych odpowiedzi. Wystarczy, że chcesz posłuchać i że zostaniesz na herbatę po spotkaniu.</p>
+          <p>Kiedy komuś dzieje się coś trudnego, reszta o tym wie. Modlimy się za siebie nawzajem, czasem pomagamy w przeprowadzce albo po prostu odbieramy telefon o późnej porze.</p>
+          <figure class="pullquote">
+            <span>Nie chodzi nam o to, żeby znać Słowo. Chcemy pozwolić, żeby Słowo nas zmieniało.</span>
+            <figcaption class="quote-src">Z rozmowy na spotkaniu</figcaption>
+          </figure>
+        </div>
+        <div class="about-photo">
+          <!-- TODO: zamień na własne zdjęcie wspólnoty, kadr pionowy ok. 900x1200 -->
+          <img src="https://picsum.photos/seed/slowo-zycia-wspolnota/900/1200" alt="Spotkanie wspólnoty" width="900" height="1200">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRZEBIEG SPOTKANIA -->
+  <section id="spotkania" class="soft reveal">
+    <div class="wrap">
+      <h2>Jak wygląda czwartkowy wieczór</h2>
+      <p class="lead" style="margin-bottom:34px">Dwie godziny, stały rytm. Jeśli przyjdziesz pierwszy raz, nikt nie poprosi cię o zabranie głosu.</p>
+      <div class="timeline">
+        <!-- TODO: dopasuj godziny do faktycznego przebiegu spotkania -->
+        <div class="step">
+          <div class="step-time">19:00</div>
+          <div>
+            <h3>Modlitwa i uwielbienie</h3>
+            <p>Zaczynamy śpiewem i wspólną modlitwą. Nie trzeba znać słów ani śpiewać głośno.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-time">19:30</div>
+          <div>
+            <h3>Pismo Święte</h3>
+            <p>Czytamy fragment, ktoś dzieli się krótkim komentarzem, potem zostajemy z tym w ciszy.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-time">20:15</div>
+          <div>
+            <h3>Rozmowa w kręgu</h3>
+            <p>Mówimy o tym, co usłyszeliśmy i co dzieje się u nas w tygodniu. Możesz tylko słuchać.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-time">21:00</div>
+          <div>
+            <h3>Herbata</h3>
+            <p>Zostajemy dłużej, bez agendy. Tu zwykle zaczynają się przyjaźnie.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MOMENT SŁOWA -->
+  <section class="verse reveal">
+    <div class="wrap">
+      <blockquote>Gdzie są dwaj albo trzej zebrani w imię moje, tam jestem pośród nich.</blockquote>
+      <cite>Mt 18,20</cite>
+    </div>
+  </section>
+
+  <!-- ALPHA -->
+  <section id="alpha" class="reveal">
+    <div class="wrap">
+      <div class="alpha">
+        <div class="alpha-grid">
+          <div>
+            <p class="eyebrow">Kurs Alpha</p>
+            <h2>Masz pytania o wiarę? Przyjdź i pytaj.</h2>
+            <p>Alpha to cykl spotkań o podstawach wiary chrześcijańskiej. Każde zaczyna się od kolacji, potem jest krótki wykład i rozmowa w małej grupie. Nie trzeba mieć przygotowania ani deklarować, w co się wierzy.</p>
+            <p>Pytania w rodzaju „czy Bóg w ogóle istnieje” są tu na miejscu. Nikt nie będzie cię przekonywał na siłę.</p>
+            <div class="btn-row"><a class="btn btn-primary" href="https://polska.alpha.org/" target="_blank" rel="noopener">Odkryj Alpha</a></div>
+          </div>
+          <div class="alpha-facts">
+            <div class="fact"><b>11</b><span>tygodni trwa cały kurs</span></div>
+            <div class="fact"><b>3</b><span>stałe elementy wieczoru: kolacja, wykład, rozmowa</span></div>
+            <div class="fact"><b>0 zł</b><span>udział jest bezpłatny</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ŻYCIE WSPÓLNOTY -->
+  <section id="zycie" class="soft reveal">
+    <div class="wrap">
+      <h2>Życie wspólnoty</h2>
+      <p class="lead" style="margin-bottom:32px">Zdjęcia i nagrania z modlitwy, wyjazdów i zwykłych czwartków.</p>
+      <div class="bento">
+        <div class="tile">
+          <!-- TODO: własne zdjęcie, kadr pionowy ok. 900x1200 -->
+          <img src="https://picsum.photos/seed/slowo-zycia-modlitwa/900/1200" alt="Wspólna modlitwa" width="900" height="1200">
+        </div>
+        <div class="tile">
+          <!-- TODO: własne zdjęcie, kadr poziomy ok. 900x600 -->
+          <img src="https://picsum.photos/seed/slowo-zycia-wyjazd/900/600" alt="Wyjazd wspólnoty" width="900" height="600">
+        </div>
+        <div class="tile tile-embed">
+          <!-- Miejsce na iframe z Facebooka. Ten kafel jest niewidoczny dla odwiedzających dopiero po wklejeniu kodu osadzenia. -->
+          <p style="margin:0">Miejsce na nagranie z Facebooka</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ZAPROSZENIE -->
+  <section id="kontakt" class="invite reveal">
+    <div class="wrap">
+      <h2>Może to jest miejsce, którego szukasz</h2>
+      <p>Nie musisz nic wiedzieć ani nikogo znać. Przyjdź z pytaniami, z ciekawością albo po prostu z potrzebą spotkania drugiego człowieka.</p>
+      <div class="btn-row"><a class="btn btn-primary" href="mailto:kontakt@slowozycia.pl">Napisz do nas</a></div>
+      <p class="contact">Albo napisz na <a href="#">Facebooku</a>. Odpisujemy zwykle w ciągu dnia.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div>
+      <a class="brand" href="#tresc"><img src="logo_SZ.png" alt="Słowo Życia"><span>Słowo Życia</span></a>
+      <p>Wspólnota katolicka. Modlitwa, Pismo Święte, rozmowa i wzajemne wsparcie.</p>
+    </div>
+    <nav>
+      <a href="#o-nas">O nas</a>
+      <a href="#spotkania">Spotkania</a>
+      <a href="#alpha">Alpha</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>
